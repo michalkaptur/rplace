@@ -6,6 +6,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
 
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) # strictly for conan
 find_package(GTest REQUIRED)
+find_package(Boost REQUIRED system)
 
 set(sources
 	main.cpp

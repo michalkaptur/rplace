@@ -8,7 +8,7 @@ reddit.com/r/place inspired system to refresh some boost::asio knowledge
 pip3 install conan
 mkdir build && cd build
 conan profile update settings.compiler.libcxx=libstdc++11 default
-conan install .. ## --build=gtest
+conan install .. # --build missing
 cmake .. -GNinja
 ninja
 ```
