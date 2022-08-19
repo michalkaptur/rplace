@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
-project(fib)
+project(rplace)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
@@ -11,5 +11,7 @@ set(sources
 	main.cpp
 )
 
-add_executable(${PROJECT_NAME} ${sources})
-target_link_libraries(${PROJECT_NAME} GTest::gtest GTest::gtest_main)
+add_executable(temp_dummy_target ${sources})
+target_link_libraries(temp_dummy_target GTest::gtest GTest::gtest_main)
+
+add_subdirectory(src)
