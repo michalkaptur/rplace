@@ -1,6 +1,10 @@
 import asyncio
+import asyncio_dgram
 
-async def test_run_server(server_path):
-    process = await asyncio.create_subprocess_exec(server_path)
-    out, err = await process.communicate()
-    assert process.returncode == 0
+
+async def test_server_prints_rx_msg(server):
+    socket = await asyncio_dgram.connect((server.addr, server.port))
+    await socket.send(b"foo")
+    out, _ = await server.process.communicate()
+    assert b"foo" in out
+    socket.close()  # TODO wrap

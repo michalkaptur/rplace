@@ -1,3 +1,5 @@
 asyncio
 pytest
 pytest-asyncio
+pytest-timeout
+asyncio-dgram
