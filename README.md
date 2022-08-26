@@ -24,7 +24,7 @@ c++20, cmake, boost::asio, UDP, json, conan, async python3, gtest
 - [ ] API allows: set pixel color, get pixel color, get complete map
 - [ ] client able to render the map
 - [ ] 16 colors
-- [ ] built easily with dependencies
+- [x] built easily with dependencies
 - [ ] tested on component level
 - [ ] CI configuration
 - [ ] hardcoded 16x16 size
