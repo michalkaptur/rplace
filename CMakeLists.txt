@@ -8,6 +8,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}) # strictly for conan
 find_package(GTest REQUIRED)
 find_package(Boost REQUIRED system)
 find_package(nlohmann_json REQUIRED)
+find_package(spdlog REQUIRED)
 
 set(sources
 	main.cpp

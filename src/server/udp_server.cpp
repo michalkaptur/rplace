@@ -1,5 +1,6 @@
 #include "udp_server.hpp"
 #include "message_handler.hpp"
+#include <spdlog/spdlog.h>
 
 void udp_server::start_receive() {
   socket_.async_receive_from(
@@ -12,7 +13,8 @@ void udp_server::handle_receive(const boost::system::error_code &error,
     std::string request(
         recv_buffer_.data(),
         bytes_transferred); // TODO: extra copy, use string view?
-    std::cout << "received message\n";
+    spdlog::debug("received {} bytes", bytes_transferred);
+    spdlog::trace("received {}", request);
     auto decoded_request = protocol::json_serializer::deserialize(request);
     // FIXME: nested lambdas below aren't that readable
     auto send = [this](std::shared_ptr<std::string> response) {
@@ -27,19 +29,24 @@ void udp_server::handle_receive(const boost::system::error_code &error,
 
     //   start_receive(); //terminate after first msg received, just to test
     //   without graceful shutdown
+  } else {
+    spdlog::warn("failed to receive message: {}", error.message());
   }
 }
-void udp_server::handle_send(std::shared_ptr<std::string> message,
+void udp_server::handle_send(std::shared_ptr<std::string> message_ptr,
                              const boost::system::error_code &error,
                              std::size_t bytes_transferred) {
   if (!error) {
-    std::cout << "message sent [" << *message << ", " << bytes_transferred
-              << " bytes]\n";
+    const auto &msg = *message_ptr; // don't dereference within logger
+    spdlog::debug("sent {} bytes", bytes_transferred);
+    spdlog::trace("message sent: {}", msg);
   } else {
-    std::cout << "failed to send message\n";
+    spdlog::warn("failed to send message: {}", error.message());
   }
 }
-udp_server::udp_server(boost::asio::io_context &io_context)
-    : socket_(io_context, udp::endpoint(udp::v4(), 4545)) { // TODO: parametrize
+udp_server::udp_server(boost::asio::io_context &io_context,
+                       unsigned port_number)
+    : socket_(io_context, udp::endpoint(udp::v4(), port_number)) {
+  spdlog::info("server bound to {} UDP port", port_number);
   start_receive();
 }

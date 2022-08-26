@@ -2,13 +2,12 @@
 
 #include <array>
 #include <boost/asio.hpp>
-#include <iostream>
 #include <memory>
 
 using boost::asio::ip::udp;
 class udp_server {
 public:
-  udp_server(boost::asio::io_context &io_context);
+  udp_server(boost::asio::io_context &io_context, unsigned port_number);
 
 private:
   void start_receive();
