@@ -2,7 +2,7 @@
 
 reddit.com/r/place inspired system to refresh some boost::asio knowledge
 
-![build](https://github.com/michalkaptur/rplace/actions/workflows/build_and_test/badge.svg)
+![build](https://github.com/michalkaptur/rplace/actions/workflows/build_and_test.yaml/badge.svg)
 
 ## how to build
 
