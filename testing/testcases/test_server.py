@@ -1,10 +1,14 @@
 import asyncio
 import asyncio_dgram
+import json
 
 
-async def test_server_dummy_response(server):
+async def test_server_ping_pong(server):
     socket = await asyncio_dgram.connect((server.addr, server.port))
-    await socket.send(b"foo")
-    response = await socket.recv()
-    assert b"bar" in response
+    ping = json.dumps({"type": "ping", "greeting": "Hey Joe!"})
+    await socket.send(ping.encode("utf-8"))
+    response, _sender = await socket.recv()
+    response = json.loads(response.decode("utf-8"))
+    assert response["type"] == "pong"
+    assert response["greeting"] == "Hey Joe!"
     socket.close()  # TODO wrap
