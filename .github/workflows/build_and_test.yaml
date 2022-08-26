@@ -1,0 +1,16 @@
+name: build_and_test
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: configure cmake
+        run: cmake -B ${{github.workspace}}/build -GNinja
+      - name: build
+        run: cmake --build ${{github.workspace}}/build
+  # test:
+  #   needs: build
+  #   runs-on: ubuntu-22.04
+  #   steps:
+
