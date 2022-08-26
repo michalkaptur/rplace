@@ -1,10 +1,8 @@
 #include <array>
 #include <boost/asio.hpp>
-#include <boost/bind/bind.hpp> //replace with lambda?
 #include <iostream>
 
 using boost::asio::ip::udp;
-using namespace boost::placeholders;
 class udp_server {
 public:
   udp_server(boost::asio::io_context &io_context)
@@ -15,11 +13,11 @@ public:
 
 private:
   void start_receive() {
-    socket_.async_receive_from(
-        boost::asio::buffer(recv_buffer_), remote_endpoint_,
-        boost::bind(&udp_server::handle_receive, this,
-                    boost::asio::placeholders::error,
-                    boost::asio::placeholders::bytes_transferred));
+    socket_.async_receive_from(boost::asio::buffer(recv_buffer_),
+                               remote_endpoint_,
+                               [this](auto err, auto rx_bytes) {
+                                 this->handle_receive(err, rx_bytes);
+                               });
   }
 
   void handle_receive(const boost::system::error_code &error,
