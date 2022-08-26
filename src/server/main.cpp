@@ -1,6 +1,7 @@
 #include <array>
 #include <boost/asio.hpp>
 #include <iostream>
+#include <memory>
 
 using boost::asio::ip::udp;
 class udp_server {
@@ -21,19 +22,30 @@ private:
   }
 
   void handle_receive(const boost::system::error_code &error,
-                      std::size_t bytes_transferred) {
+                      std::size_t /*bytes_transferred*/) {
     if (!error) {
-      for (unsigned i = 0; i < bytes_transferred; i++) {
-        std::cout << recv_buffer_[i];
-      }
+      std::cout<<"received message\n";
+      auto message = std::make_shared<std::string>("bar");
+      socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
+                            [this, message](auto err, auto bytes_tx) {
+                              this->handle_send(message, err, bytes_tx);
+                            });
+
       //   start_receive(); //terminate after first msg received, just to test
       //   without graceful shutdown
     }
   }
 
-  void handle_send(boost::shared_ptr<std::string> /*message*/,
-                   const boost::system::error_code & /*error*/,
-                   std::size_t /*bytes_transferred*/) {}
+  void handle_send(std::shared_ptr<std::string> message,
+                   const boost::system::error_code &error,
+                   std::size_t bytes_transferred) {
+    if (!error) {
+      std::cout << "message sent [" << *message << ", " << bytes_transferred
+                << " bytes]\n";
+    } else {
+      std::cout << "failed to send message\n";
+    }
+  }
 
   udp::socket socket_;
   udp::endpoint remote_endpoint_;

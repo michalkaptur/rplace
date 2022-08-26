@@ -28,8 +28,11 @@ def server_port():
 async def server(server_path, server_address, server_port):
     process = await asyncio.create_subprocess_exec(
         server_path,
-        stdout=asyncio.subprocess.PIPE,
+        # stdout=asyncio.subprocess.PIPE,
     )  # TODO parametrize socket addr
+    await asyncio.sleep(
+        1
+    )  # FIXME: server needs a moment to bind, replace with some retried ping message later on
     yield SimpleNamespace(process=process, port=server_port, addr=server_address)
     # process.terminate() # proc.communicate() already waits for termination
     await process.wait()
