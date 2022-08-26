@@ -1,4 +1,4 @@
-add_library(json_serializer src/ping.cpp src/pong.cpp src/message_type.cpp src/serializer.cpp)
+add_library(json_serializer src/ping.cpp src/pong.cpp src/serializer.cpp)
 target_include_directories(json_serializer PUBLIC include)
 target_link_libraries(json_serializer PUBLIC protocol nlohmann_json::nlohmann_json)
 add_subdirectory(tests)

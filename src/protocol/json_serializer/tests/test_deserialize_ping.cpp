@@ -1,4 +1,3 @@
-#include "json_serializer/message_type.hpp"
 #include <exception>
 #include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
