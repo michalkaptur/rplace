@@ -12,6 +12,7 @@ jobs:
           pip install conan
       - name: setup conan project
         run: |
+          conan profile new --detect default
           conan profile update settings.compiler.libcxx=libstdc++11 default
           conan install --install-folder ${{github.workspace}}/build --build missing ${{github.workspace}}
       - name: configure cmake
