@@ -10,6 +10,8 @@ find_package(Boost REQUIRED system)
 find_package(nlohmann_json REQUIRED)
 find_package(spdlog REQUIRED)
 
+enable_testing()
+
 set(sources
 	main.cpp
 )
