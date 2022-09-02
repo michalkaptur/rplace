@@ -31,11 +31,15 @@ jobs:
     steps:
       - name: load build dir
         uses: actions/cache@v3
+        env:
+          ID: ${ env.GITHUB_RUN_ID }
         with:
           path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.GITHUB_RUN_ID }}
+          key: build-dir-ninja-debug-${ID}
       - name: run unit tests
-        run: ctest --test-dir ${{github.workspace}}/build
+        run: |
+          ctest --test-dir ${{github.workspace}}/build
+          echo $ID
 
   component_tests:
     needs: build
