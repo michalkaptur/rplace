@@ -22,7 +22,7 @@ jobs:
       - name: cache build dir
         uses: actions/cache@v3
         env:
-          ID: ${ env.GITHUB_RUN_ID }
+          ID: ${{ env.GITHUB_RUN_ID }}
         with:
           path: ${{github.workspace}}/build
           key: build-dir-ninja-debug-${{ env.ID }}
@@ -34,14 +34,14 @@ jobs:
       - name: load build dir
         uses: actions/cache@v3
         env:
-          ID: ${ env.GITHUB_RUN_ID }
+          ID: ${{ env.GITHUB_RUN_ID }}
         with:
           path: ${{github.workspace}}/build
           key: build-dir-ninja-debug-${{ env.ID }}
       - name: run unit tests
         run: |
           ctest --test-dir ${{github.workspace}}/build
-          echo $ID
+          echo ID ${{ env.ID }}
 
   component_tests:
     needs: build
