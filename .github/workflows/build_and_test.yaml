@@ -35,7 +35,7 @@ jobs:
           ID: ${ env.GITHUB_RUN_ID }
         with:
           path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${ID}
+          key: build-dir-ninja-debug-${{ env.ID }}
       - name: run unit tests
         run: |
           ctest --test-dir ${{github.workspace}}/build
