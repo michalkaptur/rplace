@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.GITHUB_SHA}}
+          key: build-dir-ninja-debug-$GITHUB_SHA
 
   unit_tests:
     needs: build
@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.GITHUB_SHA}}
+          key: build-dir-ninja-debug-$GITHUB_SHA
       - name: run unit tests
         run: ctest --test-dir ${{github.workspace}}/build
 
@@ -46,7 +46,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.GITHUB_SHA}}
+          key: build-dir-ninja-debug-$GITHUB_SHA
       - name: install dependencies
         run: pip install --requirement testing/requirements.txt
       - name: run all component tests
