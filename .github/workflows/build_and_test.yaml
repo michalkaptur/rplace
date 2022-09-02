@@ -19,7 +19,20 @@ jobs:
         run: cmake -B ${{github.workspace}}/build -GNinja
       - name: build
         run: cmake --build ${{github.workspace}}/build
-  # test:
-  #   needs: build
-  #   runs-on: ubuntu-22.04
-  #   steps:
+      - name: cache build dir
+        uses: actions/cache@v3
+        with:
+          path: ${{github.workspace}}/build
+          key: build-dir-ninja-debug-${{ env.GITHUB_SHA}}
+
+  test:
+    needs: build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: load build dir
+        uses: actions/cache@v3
+        with:
+          path: ${{github.workspace}}/build
+          key: build-dir-ninja-debug-${{ env.GITHUB_SHA}}
+      - name: run unit tests
+        run: ctest --test-dir ${{github.workspace}}/build
