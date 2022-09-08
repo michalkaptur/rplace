@@ -34,6 +34,6 @@ async def server(server_path, server_address, server_port):
         1
     )  # FIXME: server needs a moment to bind, replace with some retried ping message later on
     yield SimpleNamespace(process=process, port=server_port, addr=server_address)
-    # process.terminate() # proc.communicate() already waits for termination
+    process.terminate()
     await process.wait()
-    # assert process.returncode == 0 # TODO: graceful shutdown
+    assert process.returncode == 0

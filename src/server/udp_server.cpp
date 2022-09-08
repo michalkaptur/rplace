@@ -27,8 +27,7 @@ void udp_server::handle_receive(const boost::system::error_code &error,
     message_handler handler(send);
     std::visit(handler, decoded_request);
 
-    //   start_receive(); //terminate after first msg received, just to test
-    //   without graceful shutdown
+    start_receive();
   } else {
     spdlog::warn("failed to receive message: {}", error.message());
   }
