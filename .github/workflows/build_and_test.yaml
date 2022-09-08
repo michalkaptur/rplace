@@ -1,11 +1,11 @@
 name: build_and_test
 on: push
 jobs:
-  build:
+  do_all:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: install dependencies
+      - name: install build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install --yes ninja-build g++ python3 pip
@@ -19,41 +19,9 @@ jobs:
         run: cmake -B ${{github.workspace}}/build -GNinja
       - name: build
         run: cmake --build ${{github.workspace}}/build
-      - name: cache build dir
-        uses: actions/cache@v3
-        env:
-          ID: ${{ env.GITHUB_RUN_ID }}
-        with:
-          path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.ID }}
-
-  unit_tests:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
-      - name: load build dir
-        uses: actions/cache@v3
-        env:
-          ID: ${{ env.GITHUB_RUN_ID }}
-        with:
-          path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.ID }}
       - name: run unit tests
-        run: |
-          ctest --test-dir ${{github.workspace}}/build
-          echo ID ${{ env.ID }}
-
-  component_tests:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v3
-      - name: load build dir
-        uses: actions/cache@v3
-        with:
-          path: ${{github.workspace}}/build
-          key: build-dir-ninja-debug-${{ env.GITHUB_RUN_ID }}
-      - name: install dependencies
+        run: ctest --test-dir ${{github.workspace}}/build
+      - name: install component tests dependencies
         run: pip install --requirement testing/requirements.txt
       - name: run all component tests
         working-directory: ${{github.workspace}}/testing
