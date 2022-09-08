@@ -12,4 +12,3 @@ async def test_server_ping_pong(server):
     assert response["type"] == "pong"
     assert response["greeting"] == "Hey Joe!"
     socket.close()  # TODO wrap
-    assert False #just to check CI
