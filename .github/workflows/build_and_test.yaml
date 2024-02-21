@@ -13,7 +13,7 @@ jobs:
       - name: setup conan project
         run: |
           conan profile detect
-          conan install --install-folder ${{github.workspace}}/build --build missing ${{github.workspace}}
+          conan install --output-folder ${{github.workspace}}/build --build missing ${{github.workspace}}
       - name: configure cmake
         run: cmake -B ${{github.workspace}}/build -GNinja
       - name: build
