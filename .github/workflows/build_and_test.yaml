@@ -15,7 +15,7 @@ jobs:
           conan profile detect
           conan install --output-folder ${{github.workspace}}/build --build missing ${{github.workspace}}
       - name: configure cmake
-        run: cmake -B ${{github.workspace}}/build -GNinja
+        run: cmake -B ${{github.workspace}}/build -GNinja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
       - name: build
         run: cmake --build ${{github.workspace}}/build
       - name: run unit tests
