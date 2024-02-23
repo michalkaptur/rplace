@@ -1,17 +1,19 @@
 # rplace
 
-reddit.com/r/place inspired system to refresh some boost::asio knowledge
+[reddit.com/r/place](reddit.com/r/place) inspired system to refresh some boost::asio knowledge
 
 ![build](https://github.com/michalkaptur/rplace/actions/workflows/build_and_test.yaml/badge.svg)
 
 ## how to build
 
 ```shell
-pip3 install conan
+virtualenv .venv
+source .venv/bin/activate
+pip install conan~=2.0
 mkdir build && cd build
-conan profile update settings.compiler.libcxx=libstdc++11 default
+conan profile detect
 conan install .. # --build missing
-cmake .. -GNinja
+cmake .. -GNinja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 ninja
 ```
 
