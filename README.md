@@ -38,3 +38,10 @@ c++20, cmake, boost::asio, UDP, json, conan, async python3, gtest
 - [ ] pixel map as client input to draw automatically
 - [ ] multiple maps support
 - [ ] variable map size
+
+
+### troubleshooting
+
+#### vscode integration
+
+Set `Cmake: Use CMake Presets` to `always` to force preset usage and make the conan-provided deps available.
