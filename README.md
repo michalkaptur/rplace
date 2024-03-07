@@ -10,11 +10,10 @@
 virtualenv .venv
 source .venv/bin/activate
 pip install conan~=2.0
-mkdir build && cd build
 conan profile detect
-conan install .. # --build missing
-cmake .. -GNinja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
-ninja
+conan install . --output-folder build # --build missing
+cmake . -GNinja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -B build
+cmake --build build
 ```
 
 ## tech stack
