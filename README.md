@@ -16,6 +16,17 @@ cmake . -GNinja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=
 cmake --build build
 ```
 
+## how to run tests
+
+```shell
+cd testing
+virtualenv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest -v
+```
+
+
 ## tech stack
 
 c++20, cmake, boost::asio, UDP, json, conan, async python3, gtest
