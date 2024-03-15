@@ -17,7 +17,7 @@ struct message_handler {
         protocol::Pong{.greeting = msg.greeting});
     send(std::make_shared<std::string>(resp));
   }
-  void operator()(const protocol::GetPixel& msg) { 
+  void operator()(const protocol::GetPixel& msg) {
     // TODO: return valid color
     // TODO: boundary check
     auto resp = protocol::json_serializer::serialize(
