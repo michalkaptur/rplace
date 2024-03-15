@@ -1,14 +1,13 @@
-
 #pragma once
 #include <compare>
 #include "position.hpp"
 
 namespace protocol
 {
-
-    struct GetPixel
+    struct Pixel
     {
         Position position;
-        auto operator<=>(const GetPixel &) const = default;
+        unsigned color; //TODO: figure out the representation
+        auto operator<=>(const Pixel &) const = default;
     };
 } // namespace protocol
