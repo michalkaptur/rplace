@@ -34,5 +34,6 @@ TEST(deserialize_ping, invalid_msg) {
     "invalid_greeting": "foo"
 }
 )";
-  ASSERT_THROW(protocol::json_serializer::deserialize(msg), std::exception); //TODO replace with optional
+  ASSERT_THROW(protocol::json_serializer::deserialize(msg),
+               std::exception); // TODO replace with optional
 }
