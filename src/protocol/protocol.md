@@ -1,7 +1,9 @@
 # rplace protocol
 
 JSON-encoded request-response protocol for rplace.
+
 Keys are case-sensitive.
+
 Note: at the moment the protocol in not versioned and definitely not backward-compatible.
 
 ## ping
