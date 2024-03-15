@@ -1,8 +1,8 @@
-#pragma once 
-#include <string>
-#include <protocol/ping.hpp>
+#pragma once
 #include <nlohmann/json_fwd.hpp>
+#include <protocol/ping.hpp>
+#include <string>
 
-namespace protocol::json_serializer{
-    protocol::Ping deserialize_ping(const nlohmann::json&);
+namespace protocol::json_serializer {
+protocol::Ping deserialize_ping(const nlohmann::json &);
 }

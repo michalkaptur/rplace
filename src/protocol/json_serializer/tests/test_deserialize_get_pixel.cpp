@@ -14,6 +14,6 @@ TEST(deserialize_get_pixel, valid_msg) {
 }
 )";
   auto decoded = protocol::json_serializer::deserialize(msg);
-  protocol::GetPixel expected{.position{.x=3, .y=44}};
+  protocol::GetPixel expected{.position{.x = 3, .y = 44}};
   ASSERT_THAT(decoded, testing::VariantWith<protocol::GetPixel>(expected));
 }

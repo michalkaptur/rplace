@@ -1,7 +1,7 @@
 #pragma once
+#include "protocol/get_pixel.hpp"
 #include "protocol/ping.hpp"
 #include "protocol/pong.hpp"
-#include "protocol/get_pixel.hpp"
 #include <variant>
 
 namespace protocol {

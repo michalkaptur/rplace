@@ -1,5 +1,5 @@
-#include "json_serializer/ping.hpp"
 #include "json_serializer/get_pixel.hpp"
+#include "json_serializer/ping.hpp"
 #include "protocol/types.hpp"
 #include <json_serializer/serializer.hpp>
 #include <nlohmann/json.hpp>

@@ -12,9 +12,7 @@ find_package(spdlog REQUIRED)
 
 enable_testing()
 
-set(sources
-	main.cpp
-)
+set(sources main.cpp)
 
 add_executable(temp_dummy_target ${sources})
 target_link_libraries(temp_dummy_target GTest::gtest GTest::gtest_main)
