@@ -32,3 +32,13 @@ async def test_get_pixel_color(server_sock):
     assert response["type"] == "pixel"
     assert response["position"] == {"x": 2, "y": 3}
     assert response["color"] == 0  # black by default?
+
+
+async def test_set_pixel_color(server_sock):
+    ping = json.dumps({"type": "set_pixel", "position": {"x": 12, "y": 13}, "color": 1})
+    await server_sock.send(ping.encode("utf-8"))
+    response, _sender = await server_sock.recv()
+    response = json.loads(response.decode("utf-8"))
+    assert response["type"] == "pixel"
+    assert response["position"] == {"x": 12, "y": 13}
+    assert response["color"] == 1

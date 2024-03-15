@@ -6,6 +6,7 @@
 #include <protocol/get_pixel.hpp>
 #include <protocol/ping.hpp>
 #include <protocol/pixel.hpp>
+#include <protocol/set_pixel.hpp>
 
 template <class Callable>
   requires requires(Callable f) { f(std::shared_ptr<std::string>()); }
@@ -22,6 +23,13 @@ struct message_handler {
     // TODO: boundary check
     auto resp = protocol::json_serializer::serialize(
         protocol::Pixel{.position = msg.position, .color = 0});
+    send(std::make_shared<std::string>(resp));
+  }
+  void operator()(const protocol::SetPixel &msg) {
+    // TODO: actually set the color
+    // TODO: boundary check
+    auto resp = protocol::json_serializer::serialize(
+        protocol::Pixel{.position = msg.position, .color = msg.color});
     send(std::make_shared<std::string>(resp));
   }
 
