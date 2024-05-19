@@ -14,15 +14,15 @@ c++20, cmake, boost::asio, UDP, json, conan, async python3, gtest
 - [x] no map persistance on server
 - [x] no user identification
 - [ ] API allows:
-    - [ ] set pixel color
+    - [x] set pixel color
     - [x] get pixel color
     - [ ] get complete map
 - [ ] client able to render the map
-- [ ] 8 RGB colors
+- [x] 8 RGB colors
 - [x] built easily with dependencies
 - [ ] tested on component level
 - [ ] CI configuration
-- [ ] hardcoded 16x16 size
+- [x] hardcoded 16x16 size
 
 ## further features
 

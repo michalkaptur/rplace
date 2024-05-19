@@ -1,3 +1,4 @@
+#include "map.hpp"
 #include "udp_server.hpp"
 #include <boost/asio.hpp>
 #include <csignal>
@@ -19,7 +20,10 @@ int main() {
   boost::asio::io_context io_context;
   boost::asio::signal_set signals(io_context, SIGINT, SIGTERM);
   signals.async_wait(handler);
-  udp_server server(io_context, 4545); // TODO: parametrize port
+  // TODO parametrize size
+  constexpr auto size = 16;
+  auto map = make_map(size);
+  udp_server server(io_context, 4545, map); // TODO: parametrize port
   io_context.run();
   spdlog::info("rplace server is shutting down");
   return 0;

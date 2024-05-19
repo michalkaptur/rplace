@@ -1,4 +1,5 @@
 #include "udp_server.hpp"
+#include "map.hpp"
 #include "message_handler.hpp"
 #include <spdlog/spdlog.h>
 
@@ -24,7 +25,7 @@ void udp_server::handle_receive(const boost::system::error_code &error,
                                     this->handle_send(response, err, bytes_tx);
                                   });
     };
-    message_handler handler(send);
+    message_handler handler(send, map);
     std::visit(handler, decoded_request);
 
     start_receive();
@@ -44,8 +45,8 @@ void udp_server::handle_send(std::shared_ptr<std::string> message_ptr,
   }
 }
 udp_server::udp_server(boost::asio::io_context &io_context,
-                       unsigned port_number)
-    : socket_(io_context, udp::endpoint(udp::v4(), port_number)) {
+                       unsigned port_number, Map &map)
+    : socket_(io_context, udp::endpoint(udp::v4(), port_number)), map(map) {
   spdlog::info("server bound to {} UDP port", port_number);
   start_receive();
 }

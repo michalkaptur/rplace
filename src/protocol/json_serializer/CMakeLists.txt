@@ -4,6 +4,7 @@ add_library(
     src/pong.cpp
     src/serializer.cpp
     src/get_pixel.cpp
+    src/set_pixel.cpp
     src/pixel.cpp
 )
 target_include_directories(json_serializer PUBLIC include)
