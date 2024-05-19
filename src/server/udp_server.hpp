@@ -1,5 +1,6 @@
 #pragma once
 
+#include "map.hpp"
 #include <array>
 #include <boost/asio.hpp>
 #include <memory>
@@ -7,7 +8,7 @@
 using boost::asio::ip::udp;
 class udp_server {
 public:
-  udp_server(boost::asio::io_context &io_context, unsigned port_number);
+  udp_server(boost::asio::io_context &, unsigned port_number, Map &);
 
 private:
   void start_receive();
@@ -20,6 +21,7 @@ private:
                    std::size_t bytes_transferred);
 
   udp::socket socket_;
+  Map &map;
   udp::endpoint remote_endpoint_;
   std::array<char, 255> recv_buffer_;
 };
