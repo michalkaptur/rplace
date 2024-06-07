@@ -8,9 +8,6 @@ def pytest_addoption(parser):
     parser.addoption(
         "--server-path", action="store", default="../build/src/server/rplace_server"
     )
-
-
-def pytest_addoption(parser):
     parser.addoption(
         "--client-path", action="store", default="../build/src/client/rplace_client"
     )
