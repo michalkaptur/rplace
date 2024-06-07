@@ -2,6 +2,10 @@
 #include <boost/asio.hpp>
 
 using boost::asio::ip::udp;
+
+// Dummy client, which requests hardcoded pixel params
+// and mostly ignores the response
+
 int main() {
   boost::asio::io_service io_service;
   udp::socket socket{io_service};
