@@ -10,9 +10,20 @@ def pytest_addoption(parser):
     )
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--client-path", action="store", default="../build/src/client/rplace_client"
+    )
+
+
 @pytest.fixture(scope="session")
 def server_path(pytestconfig):
     return pytestconfig.getoption("server_path")
+
+
+@pytest.fixture(scope="session")
+def client_path(pytestconfig):
+    return pytestconfig.getoption("client_path")
 
 
 @pytest.fixture()
